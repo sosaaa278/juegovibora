@@ -49,22 +49,20 @@ function draw() {
         scoreEl.textContent = score;
     }
 }
-
-document.addEventListener("keydown", e => {
-    if (e.key === "ArrowUp") { dx = 0; dy = -10; }
-    if (e.key === "ArrowDown") { dx = 0; dy = 10; }
-    if (e.key === "ArrowLeft") { dx = -10; dy = 0; }
-    if (e.key === "ArrowRight") { dx = 10; dy = 0; }
-});
-
-setInterval(draw, 100);
-
 function changeDirection(dir) {
-    if (dir === "up" && vy === 0) { vx = 0; vy = -grid; }
-    if (dir === "down" && vy === 0) { vx = 0; vy = grid; }
-    if (dir === "left" && vx === 0) { vx = -grid; vy = 0; }
-    if (dir === "right" && vx === 0) { vx = grid; vy = 0; }
+    if (dir === "up" && dy === 0) { dx = 0; dy = -10; }
+    if (dir === "down" && dy === 0) { dx = 0; dy = 10; }
+    if (dir === "left" && dx === 0) { dx = -10; dy = 0; }
+    if (dir === "right" && dx === 0) { dx = 10; dy = 0; }
 }
+
+// Teclado
+document.addEventListener("keydown", e => {
+    if (e.key === "ArrowUp") changeDirection("up");
+    if (e.key === "ArrowDown") changeDirection("down");
+    if (e.key === "ArrowLeft") changeDirection("left");
+    if (e.key === "ArrowRight") changeDirection("right");
+});
 
 // Botones táctiles
 document.querySelectorAll(".controls button").forEach(btn => {

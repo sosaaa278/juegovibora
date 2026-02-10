@@ -10,20 +10,25 @@ canvas {
 }
 
 .controls {
-    margin-top: 15px;
+    margin-top: 20px;
     user-select: none;
 }
 
+.controls>div {
+    display: flex;
+    justify-content: center;
+}
+
 .controls button {
-    width: 65px;
-    height: 65px;
-    margin: 5px;
-    font-size: 26px;
+    width: 90px;
+    height: 90px;
+    margin: 8px;
+    font-size: 36px;
     border-radius: 50%;
     border: none;
     background: radial-gradient(circle, #9d4edd, #5a189a);
     color: white;
-    box-shadow: 0 0 15px rgba(157, 78, 221, 0.8);
+    box-shadow: 0 0 20px rgba(157, 78, 221, 0.9);
     touch-action: manipulation;
 }
 
