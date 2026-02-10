@@ -62,6 +62,19 @@ function changeDirection(dir) {
     if (dir === "right" && dx === 0) { dx = size; dy = 0; }
 }
 
+document.addEventListener(
+    "touchstart",
+    function (e) {
+        const target = e.target;
+        if (target.dataset && target.dataset.dir) {
+            e.preventDefault();
+            changeDirection(target.dataset.dir);
+        }
+    },
+    { passive: false }
+);
+
+
 /* 🔥 CONTROLES TÁCTILES (ESTO ES LA CLAVE) */
 document.querySelectorAll(".controls button").forEach(btn => {
     btn.addEventListener(
