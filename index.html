@@ -17,13 +17,14 @@
     <h1>🐍 Snake PWA</h1>
     <canvas id="game" width="300" height="300"></canvas>
     <div class="controls">
-        <button type="button" data-dir="up">▲</button>
+        <button type="button" ontouchstart="changeDirection('up')">▲</button>
         <div>
-            <button type="button" data-dir="left">◀</button>
-            <button type="button" data-dir="down">▼</button>
-            <button type="button" data-dir="right">▶</button>
+            <button type="button" ontouchstart="changeDirection('left')">◀</button>
+            <button type="button" ontouchstart="changeDirection('down')">▼</button>
+            <button type="button" ontouchstart="changeDirection('right')">▶</button>
         </div>
     </div>
+
 
 
     <p>Puntaje: <span id="score">0</span></p>
