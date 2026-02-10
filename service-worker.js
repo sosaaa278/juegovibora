@@ -1,4 +1,4 @@
-const CACHE_NAME = "snake-pwa-cache-v4";
+const CACHE_NAME = "snake-pwa-cache-v5";
 
 
 const FILES = [
