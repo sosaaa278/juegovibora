@@ -64,14 +64,11 @@ document.addEventListener("keydown", e => {
     if (e.key === "ArrowRight") changeDirection("right");
 });
 
-// Botones táctiles
 document.querySelectorAll(".controls button").forEach(btn => {
-    btn.addEventListener("touchstart", e => {
+
+    btn.addEventListener("pointerdown", e => {
         e.preventDefault();
         changeDirection(btn.dataset.dir);
     });
 
-    btn.addEventListener("click", () => {
-        changeDirection(btn.dataset.dir);
-    });
 });
