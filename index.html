@@ -2,6 +2,8 @@
 <html lang="es">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
     <meta charset="UTF-8">
     <title>Snake PWA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +15,15 @@
 <body>
     <h1>🐍 Snake PWA</h1>
     <canvas id="game" width="300" height="300"></canvas>
+    <div class="controls">
+        <button data-dir="up">▲</button>
+        <div>
+            <button data-dir="left">◀</button>
+            <button data-dir="down">▼</button>
+            <button data-dir="right">▶</button>
+        </div>
+    </div>
+
     <p>Puntaje: <span id="score">0</span></p>
 
     <script src="game.js"></script>

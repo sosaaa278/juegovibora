@@ -8,3 +8,30 @@ canvas {
     background: #000;
     border: 3px solid #4CAF50;
 }
+
+.controls {
+    margin-top: 15px;
+    user-select: none;
+}
+
+.controls button {
+    width: 65px;
+    height: 65px;
+    margin: 5px;
+    font-size: 26px;
+    border-radius: 50%;
+    border: none;
+    background: radial-gradient(circle, #9d4edd, #5a189a);
+    color: white;
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.8);
+    touch-action: manipulation;
+}
+
+.controls button:active {
+    transform: scale(0.9);
+    background: #c77dff;
+}
+
+body {
+    overscroll-behavior: none;
+}

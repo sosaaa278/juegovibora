@@ -59,3 +59,21 @@ document.addEventListener("keydown", e => {
 
 setInterval(draw, 100);
 
+function changeDirection(dir) {
+    if (dir === "up" && vy === 0) { vx = 0; vy = -grid; }
+    if (dir === "down" && vy === 0) { vx = 0; vy = grid; }
+    if (dir === "left" && vx === 0) { vx = -grid; vy = 0; }
+    if (dir === "right" && vx === 0) { vx = grid; vy = 0; }
+}
+
+// Botones táctiles
+document.querySelectorAll(".controls button").forEach(btn => {
+    btn.addEventListener("touchstart", e => {
+        e.preventDefault();
+        changeDirection(btn.dataset.dir);
+    });
+
+    btn.addEventListener("click", () => {
+        changeDirection(btn.dataset.dir);
+    });
+});
