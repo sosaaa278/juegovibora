@@ -1,4 +1,5 @@
-const CACHE_NAME = "snake-pwa-cache-v3";
+const CACHE_NAME = "snake-pwa-cache-v4";
+
 
 const FILES = [
     "index.html",

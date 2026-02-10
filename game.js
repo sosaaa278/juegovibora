@@ -2,61 +2,79 @@ const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 const scoreEl = document.getElementById("score");
 
+const size = 10;
 let snake = [{ x: 150, y: 150 }];
-let food = { x: 60, y: 60 };
-let dx = 10;
+let food = randomFood();
+let dx = size;
 let dy = 0;
 let score = 0;
+
+function randomFood() {
+    return {
+        x: Math.floor(Math.random() * (canvas.width / size)) * size,
+        y: Math.floor(Math.random() * (canvas.height / size)) * size
+    };
+}
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Dibujar comida
+    // comida
     ctx.fillStyle = "red";
-    ctx.fillRect(food.x, food.y, 10, 10);
+    ctx.fillRect(food.x, food.y, size, size);
 
-    // Dibujar serpiente
+    // snake
     ctx.fillStyle = "lime";
-    snake.forEach(part => ctx.fillRect(part.x, part.y, 10, 10));
+    snake.forEach(p => ctx.fillRect(p.x, p.y, size, size));
 
-    // Mover serpiente
     const head = { x: snake[0].x + dx, y: snake[0].y + dy };
     snake.unshift(head);
 
-    // Comer comida
     if (head.x === food.x && head.y === food.y) {
         score++;
         scoreEl.textContent = score;
-        food = {
-            x: Math.floor(Math.random() * 30) * 10,
-            y: Math.floor(Math.random() * 30) * 10
-        };
+        food = randomFood();
     } else {
         snake.pop();
     }
 
-    // Colisiones
     if (
         head.x < 0 || head.y < 0 ||
         head.x >= canvas.width || head.y >= canvas.height ||
         snake.slice(1).some(p => p.x === head.x && p.y === head.y)
     ) {
-        alert("Game Over");
-        snake = [{ x: 150, y: 150 }];
-        dx = 10;
-        dy = 0;
-        score = 0;
-        scoreEl.textContent = score;
+        resetGame();
     }
 }
-function changeDirection(dir) {
-    if (dir === "up" && dy === 0) { dx = 0; dy = -10; }
-    if (dir === "down" && dy === 0) { dx = 0; dy = 10; }
-    if (dir === "left" && dx === 0) { dx = -10; dy = 0; }
-    if (dir === "right" && dx === 0) { dx = 10; dy = 0; }
+
+function resetGame() {
+    snake = [{ x: 150, y: 150 }];
+    dx = size;
+    dy = 0;
+    score = 0;
+    scoreEl.textContent = score;
 }
 
-// Teclado
+function changeDirection(dir) {
+    if (dir === "up" && dy === 0) { dx = 0; dy = -size; }
+    if (dir === "down" && dy === 0) { dx = 0; dy = size; }
+    if (dir === "left" && dx === 0) { dx = -size; dy = 0; }
+    if (dir === "right" && dx === 0) { dx = size; dy = 0; }
+}
+
+/* 🔥 CONTROLES TÁCTILES (ESTO ES LA CLAVE) */
+document.querySelectorAll(".controls button").forEach(btn => {
+    btn.addEventListener(
+        "touchstart",
+        e => {
+            e.preventDefault();
+            changeDirection(btn.dataset.dir);
+        },
+        { passive: false }
+    );
+});
+
+/* Teclado (PC) */
 document.addEventListener("keydown", e => {
     if (e.key === "ArrowUp") changeDirection("up");
     if (e.key === "ArrowDown") changeDirection("down");
@@ -64,11 +82,4 @@ document.addEventListener("keydown", e => {
     if (e.key === "ArrowRight") changeDirection("right");
 });
 
-document.querySelectorAll(".controls button").forEach(btn => {
-
-    btn.addEventListener("pointerdown", e => {
-        e.preventDefault();
-        changeDirection(btn.dataset.dir);
-    });
-
-});
+setInterval(draw, 120);
